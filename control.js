@@ -14,7 +14,7 @@ var c3 = $('#c3');
 var rd1 = $('#rd1');
 var rd2 = $('#rd2');
 var rd3 = $('#rd3');
-var rd4 = $('#rd4');
+//var rd4 = $('#rd4');
 
 var road = $('.road');
 var car = $('#myCar');
@@ -89,7 +89,7 @@ function carsDown(thisCar){
   if (parseInt(thisCar.css('top')) > (road_height)){
     thisCar.css('top', -80);
     randVal = parseInt(Math.random()*(road_width-car_width));
-    console.log(randVal);
+    //console.log(randVal);
     thisCar.css('left',randVal);
     
   }
