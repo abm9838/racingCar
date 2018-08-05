@@ -35,6 +35,7 @@ var randPlace=-200;
 var count=0;
 var scoreInc=1;
 var rdSpeedInc=0.01;
+var speedInc=0.001;
 
 var move_left = false;
 var move_right = false;
@@ -65,10 +66,12 @@ function move_cars(){
     count++;
     if(count > 10){
       score+=scoreInc;
-      rdSpeed+=rdSpeedInc
+      rdSpeed+=rdSpeedInc;
+      speed+=speedInc;
       count=0;
       scoreInc +=0.01;
       rdSpeedInc+=0.001;
+      speedInc+=0.001;
       scoreDiv.html(parseInt(score));
     }
     
