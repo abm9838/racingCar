@@ -87,7 +87,7 @@ function move_cars(){
 
 function carsDown(thisCar){
   if (parseInt(thisCar.css('top')) > (road_height)){
-    thisCar.css('top', -80);
+    thisCar.css('top', -200);
     randVal = parseInt(Math.random()*(road_width-car_width));
     //console.log(randVal);
     thisCar.css('left',randVal);
@@ -120,14 +120,49 @@ function move_lines(){
 
 function lineDown(thisLine){
   if (parseInt(thisLine.css('top')) > (road_height)){
-    thisLine.css('top', -100);
+    thisLine.css('top', -90);
   }
   thisLine.css('top',parseInt(thisLine.css('top'))+rdSpeed);
 }
 
 
 /************************** */
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", function(event) {
+      // alpha: rotation around z-axis
+      //var rotateDegrees = event.alpha;
+      // gamma: left to right
+      var leftToRight = event.gamma;
+      // beta: front back motion
+      var frontToBack = event.beta;
 
+      handleOrientationEvent(frontToBack, leftToRight);
+  }, true);
+}
+
+var handleOrientationEvent = function(frontToBack, leftToRight) {
+  if(gameOver==false){
+    if(leftToRight < -15){ move_left = requestAnimationFrame(left); }
+    else if (leftToRight > 15){ move_right = requestAnimationFrame(right); }
+    else{
+      move_left = cancelAnimationFrame(move_left);
+      move_left=false;
+      move_right = cancelAnimationFrame(move_right);
+      move_right=false;
+      
+    }
+
+    if(frontToBack < -15){ move_up = requestAnimationFrame(up); }
+    else if ( frontToBack > 15){ move_down = requestAnimationFrame(down); }
+    else{
+      move_up = cancelAnimationFrame(move_up);
+      move_up=false;
+      move_down = cancelAnimationFrame(move_down);
+      move_down=false;
+      
+    }
+  }
+};
 
 $(document).on("keydown",function(e){
 
