@@ -42,6 +42,8 @@ var move_right = false;
 var move_up = false;
 var move_down = false;
 
+var mobCom=0;
+
 start();
 
 function start(){
@@ -142,6 +144,7 @@ if (window.DeviceOrientationEvent) {
 
 var handleOrientationEvent = function(frontToBack, leftToRight) {
   if(gameOver==false){
+    mobCom=4;
     if(leftToRight < -15){ move_left = requestAnimationFrame(left); }
     else if (leftToRight > 15){ move_right = requestAnimationFrame(right); }
     else{
@@ -166,6 +169,8 @@ var handleOrientationEvent = function(frontToBack, leftToRight) {
 
 $(document).on("keydown",function(e){
 
+  mobCom = 0;
+
   if(gameOver == false){
     var pressedKey = e.keyCode;
     //console.log(pressedKey);
@@ -188,6 +193,7 @@ $(document).on("keydown",function(e){
 
 });
 $(document).on("keyup",function(e){
+  
 
   if(gameOver == false){
     var pressedKey = e.keyCode;
@@ -217,28 +223,28 @@ $(document).on("keyup",function(e){
 
 function left(){
   if (gameOver == false && parseInt(car.css('left'))>7){
-    car.css('left', parseInt(car.css('left'))-5)
+    car.css('left', parseInt(car.css('left'))-5+mobCom)
     move_left=requestAnimationFrame(left);
   }
 }
 
 function up(){
   if (gameOver == false && (parseInt(car.css('top')))>0 ){
-    car.css('top', parseInt(car.css('top'))-5)
+    car.css('top', parseInt(car.css('top'))-5+mobCom)
     move_up=requestAnimationFrame(up);
   }
 }
 
 function right(){
   if (gameOver == false &&  ((parseInt(car.css('left'))+car_width) <road_width-5)){
-    car.css('left', parseInt(car.css('left'))+5)
+    car.css('left', parseInt(car.css('left'))+5-mobCom)
     move_right=requestAnimationFrame(right);
   }
 }
 
 function down(){
   if (gameOver == false && ((parseInt(car.css('top'))+car_height) <road_height-2) ){
-    car.css('top', parseInt(car.css('top'))+5)
+    car.css('top', parseInt(car.css('top'))+5-mobCom)
     move_down=requestAnimationFrame(down);
   }
 }
