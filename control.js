@@ -129,24 +129,22 @@ function lineDown(thisLine){
 
 
 /************************** */
+/***************************************************************** 
+              DEVICE ORIENTATION 
+************************************************************************************ */
 if (window.DeviceOrientationEvent) {
   window.addEventListener("deviceorientation", function(event) {
-      // alpha: rotation around z-axis
-      //var rotateDegrees = event.alpha;
-      // gamma: left to right
       var leftToRight = event.gamma;
-      // beta: front back motion
       var frontToBack = event.beta;
-
       handleOrientationEvent(frontToBack, leftToRight);
   }, true);
 }
 
 var handleOrientationEvent = function(frontToBack, leftToRight) {
   if(gameOver==false){
-    mobCom=4;
-    if(leftToRight < -15){ move_left = requestAnimationFrame(left); }
-    else if (leftToRight > 15){ move_right = requestAnimationFrame(right); }
+    mobCom=3;
+    if(leftToRight < -10){ move_left = requestAnimationFrame(left); }
+    else if (leftToRight > 10){ move_right = requestAnimationFrame(right); }
     else{
       move_left = cancelAnimationFrame(move_left);
       move_left=false;
@@ -155,8 +153,8 @@ var handleOrientationEvent = function(frontToBack, leftToRight) {
       
     }
 
-    if(frontToBack < -15){ move_up = requestAnimationFrame(up); }
-    else if ( frontToBack > 15){ move_down = requestAnimationFrame(down); }
+    if(frontToBack < -10){ move_up = requestAnimationFrame(up); }
+    else if ( frontToBack > 10){ move_down = requestAnimationFrame(down); }
     else{
       move_up = cancelAnimationFrame(move_up);
       move_up=false;
