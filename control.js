@@ -142,9 +142,13 @@ if (window.DeviceOrientationEvent) {
 
 var handleOrientationEvent = function(frontToBack, leftToRight) {
   if(gameOver==false){
-    mobCom=3;
-    if(leftToRight < -10){ move_left = requestAnimationFrame(left); }
-    else if (leftToRight > 10){ move_right = requestAnimationFrame(right); }
+    mobCom=4.5;
+    if(leftToRight < -10){ 
+      mobCom = mobCom - (leftToRight*(-0.01));
+      move_left = requestAnimationFrame(left); }
+    else if (leftToRight > 10){ 
+      mobCom = mobCom - (leftToRight*(-0.01));
+      move_right = requestAnimationFrame(right); }
     else{
       move_left = cancelAnimationFrame(move_left);
       move_left=false;
@@ -153,8 +157,12 @@ var handleOrientationEvent = function(frontToBack, leftToRight) {
       
     }
 
-    if(frontToBack < -10){ move_up = requestAnimationFrame(up); }
-    else if ( frontToBack > 10){ move_down = requestAnimationFrame(down); }
+    if(frontToBack < -10){ 
+      mobCom = mobCom - (leftToRight*(-0.01));
+      move_up = requestAnimationFrame(up); }
+    else if ( frontToBack > 10){ 
+      mobCom = mobCom - (leftToRight*(-0.01));
+      move_down = requestAnimationFrame(down); }
     else{
       move_up = cancelAnimationFrame(move_up);
       move_up=false;
